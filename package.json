@@ -1,6 +1,6 @@
 {
   "name": "developer-logs",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Log kits that aid developers.",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",

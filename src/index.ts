@@ -14,30 +14,19 @@ export enum LogState {
  * Object containing log state methods.
  */
 const logStates = {
-  /**
-   * Logs a message if the NODE_ENV is not production.
-   * @param message - The message to log.
-   */
   [LogState.DEFAULT]: (message: string): void => {
     if (process.env.NODE_ENV !== "production") {
       console.log(message);
     }
   },
-
-  /**
-   * Logs a debug message if the NODE_ENV is not production and DEV_MODE is set to 'debug'.
-   * @param message - The message to log.
-   */
   [LogState.DEBUGMODE]: (message: string): void => {
     if (process.env.NODE_ENV !== "production") {
-      if (!process.env.DEV_MODE) {
+      if (process.env.DEV_MODE === "debug") {
+        console.log(`DEBUG - ${message}`);
+      } else {
         console.warn(
           "Cannot use DEBUGMODE when process.env.DEV_MODE is undefined or not set to 'debug'"
         );
-        return;
-      }
-      if (process.env.DEV_MODE === "debug") {
-        console.log(`DEBUG - ${message}`);
       }
     }
   },
@@ -51,6 +40,18 @@ const colors = {
   green: "\x1b[32m",
   red: "\x1b[31m",
   magenta: "\x1b[35m",
+  yellow: "\x1b[33m",
+  cyan: "\x1b[36m",
+  white: "\x1b[37m",
+  black: "\x1b[30m",
+  brightBlue: "\x1b[94m",
+  brightGreen: "\x1b[92m",
+  brightRed: "\x1b[91m",
+  brightMagenta: "\x1b[95m",
+  brightYellow: "\x1b[93m",
+  brightCyan: "\x1b[96m",
+  brightWhite: "\x1b[97m",
+  brightBlack: "\x1b[90m",
   reset: "\x1b[0m",
 };
 
@@ -80,77 +81,34 @@ const logInColor = (
   message: string,
   header: string,
   color: string,
-  state: LogState | "DEFAULT" | "DEBUGMODE"
+  state: LogState
 ): void => {
   logStates[state](formatMessage(color, message, header));
 };
 
 /**
- * Logs a message in blue color.
- * @param message - The message to log.
- * @param header - The header for the message. Default is "tralseDb".
- * @param state - The logging state. Default is LogState.DEFAULT.
+ * Creates a logging function for a specific color.
+ * @param color - The ANSI color code.
+ * @returns The logging function.
  */
-const blue = (
-  message: string,
-  header: string = "tralseDb",
-  state: LogState | "DEFAULT" | "DEBUGMODE" = LogState.DEFAULT
-): void => {
-  logInColor(message, header, colors.blue, state);
-};
-
-/**
- * Logs a message in green color.
- * @param message - The message to log.
- * @param header - The header for the message. Default is "tralseDb".
- * @param state - The logging state. Default is LogState.DEFAULT.
- */
-const green = (
-  message: string,
-  header: string = "tralseDb",
-  state: LogState | "DEFAULT" | "DEBUGMODE" = LogState.DEFAULT
-): void => {
-  logInColor(message, header, colors.green, state);
-};
-
-/**
- * Logs a message in red color.
- * @param message - The message to log.
- * @param header - The header for the message. Default is "tralseDb".
- * @param state - The logging state. Default is LogState.DEFAULT.
- */
-const red = (
-  message: string,
-  header: string = "tralseDb",
-  state: LogState | "DEFAULT" | "DEBUGMODE" = LogState.DEFAULT
-): void => {
-  logInColor(message, header, colors.red, state);
-};
-
-/**
- * Logs a message in magenta color.
- * @param message - The message to log.
- * @param header - The header for the message. Default is "tralseDb".
- * @param state - The logging state. Default is LogState.DEFAULT.
- */
-const magenta = (
-  message: string,
-  header: string = "tralseDb",
-  state: LogState | "DEFAULT" | "DEBUGMODE" = LogState.DEFAULT
-): void => {
-  logInColor(message, header, colors.magenta, state);
-};
+const createLogger =
+  (color: string) =>
+  (
+    message: string,
+    header: string = "tralseDb",
+    state: LogState = LogState.DEFAULT
+  ): void => {
+    logInColor(message, header, color, state);
+  };
 
 /**
  * Exported logging functions.
  * @example
- * ```javascript
+ * ```typescript
  * import dotenv from "dotenv";
  * import { log } from "@tralse/developer-logs";
  *
  * dotenv.config();
- *
- * // Note that these logs can be printed when the process.env.NODE_ENV is set up to `development`.
  *
  * // Logs in blue, and uses default header.
  * log.blue("This is a blue message");
@@ -165,4 +123,21 @@ const magenta = (
  * log.magenta("This is a magenta message");
  * ```
  */
-export const log = { blue, green, red, magenta };
+export const log = {
+  blue: createLogger(colors.blue),
+  green: createLogger(colors.green),
+  red: createLogger(colors.red),
+  magenta: createLogger(colors.magenta),
+  yellow: createLogger(colors.yellow),
+  cyan: createLogger(colors.cyan),
+  white: createLogger(colors.white),
+  black: createLogger(colors.black),
+  brightBlue: createLogger(colors.brightBlue),
+  brightGreen: createLogger(colors.brightGreen),
+  brightRed: createLogger(colors.brightRed),
+  brightMagenta: createLogger(colors.brightMagenta),
+  brightYellow: createLogger(colors.brightYellow),
+  brightWhite: createLogger(colors.brightWhite),
+  brightCyan: createLogger(colors.brightCyan),
+  brightBlack: createLogger(colors.brightBlack),
+};

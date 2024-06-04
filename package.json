@@ -1,0 +1,35 @@
+{
+  "name": "developer-logs",
+  "version": "0.0.0",
+  "description": "Log kits that aid developers.",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsup",
+    "patch": "npm version patch",
+    "publish": "tsup && npm publish --access=public && exit",
+    "release": "standard-version",
+    "release:minor": "standard-version --release-as minor",
+    "release:major": "standard-version --release-as major"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kntgio-z/developer-logs.git"
+  },
+  "author": "Gio Kent",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kntgio-z/developer-logs/issues"
+  },
+  "homepage": "https://github.com/kntgio-z/developer-logs#readme",
+  "dependencies": {
+    "dotenv": "^16.4.5"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.1",
+    "standard-version": "^9.5.0",
+    "tsup": "^8.1.0",
+    "typescript": "^5.4.5"
+  }
+}

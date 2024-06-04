@@ -4,7 +4,23 @@ A Node.js utility method for logging with environment-based states and colorful 
 
 ## Features
 
-- Log messages in different colors (blue, green, red, magenta are the colors that are only supported in this version).
+- Log messages in different colors:
+  - blue,
+  - green,
+  - red,
+  - magenta,
+  - yellow,
+  - cyan,
+  - white,
+  - black,
+  - brightBlue,
+  - brightGreen,
+  - brightRed,
+  - brightMagenta,
+  - brightYellow,
+  - brightCyan,
+  - brightWhite, and
+  - brightBlack.
 - Conditional logging based on environment variables.
 
 ## Installation

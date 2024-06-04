@@ -5,7 +5,7 @@ dotenv.config();
 /**
  * Enumeration of log states.
  */
-enum LogState {
+export enum LogState {
   DEFAULT = "DEFAULT",
   DEBUGMODE = "DEBUGMODE",
 }
@@ -80,7 +80,7 @@ const logInColor = (
   message: string,
   header: string,
   color: string,
-  state: LogState
+  state: LogState | "DEFAULT" | "DEBUGMODE"
 ): void => {
   logStates[state](formatMessage(color, message, header));
 };
@@ -94,7 +94,7 @@ const logInColor = (
 const blue = (
   message: string,
   header: string = "tralseDb",
-  state: LogState = LogState.DEFAULT
+  state: LogState | "DEFAULT" | "DEBUGMODE" = LogState.DEFAULT
 ): void => {
   logInColor(message, header, colors.blue, state);
 };
@@ -108,7 +108,7 @@ const blue = (
 const green = (
   message: string,
   header: string = "tralseDb",
-  state: LogState = LogState.DEFAULT
+  state: LogState | "DEFAULT" | "DEBUGMODE" = LogState.DEFAULT
 ): void => {
   logInColor(message, header, colors.green, state);
 };
@@ -122,7 +122,7 @@ const green = (
 const red = (
   message: string,
   header: string = "tralseDb",
-  state: LogState = LogState.DEFAULT
+  state: LogState | "DEFAULT" | "DEBUGMODE" = LogState.DEFAULT
 ): void => {
   logInColor(message, header, colors.red, state);
 };
@@ -136,7 +136,7 @@ const red = (
 const magenta = (
   message: string,
   header: string = "tralseDb",
-  state: LogState = LogState.DEFAULT
+  state: LogState | "DEFAULT" | "DEBUGMODE" = LogState.DEFAULT
 ): void => {
   logInColor(message, header, colors.magenta, state);
 };

@@ -12,7 +12,7 @@ A Node.js utility method for logging with environment-based states and colorful 
 To install the package, you can use npm:
 
 ```bash
-npm install colorful-logger
+npm install @tralse/developer-logs
 ```
 
 ## Usage

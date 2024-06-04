@@ -1,5 +1,5 @@
 {
-  "name": "developer-logs",
+  "name": "@tralse/developer-logs",
   "version": "1.0.0",
   "description": "Log kits that aid developers.",
   "main": "./dist/index.js",

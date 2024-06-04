@@ -20,14 +20,11 @@ const logStates = {
     }
   },
   [LogState.DEBUGMODE]: (message: string): void => {
-    if (process.env.NODE_ENV !== "production") {
-      if (process.env.DEV_MODE === "debug") {
-        console.log(`DEBUG - ${message}`);
-      } else {
-        console.warn(
-          "Cannot use DEBUGMODE when process.env.DEV_MODE is undefined or not set to 'debug'"
-        );
-      }
+    if (
+      process.env.NODE_ENV !== "production" &&
+      process.env.DEV_MODE === "debug"
+    ) {
+      console.log(`DEBUG - ${message}`);
     }
   },
 };
